@@ -20,7 +20,7 @@ void set_servo_pos_millis(int port, int target, int millis) {
         pos += dx;
         set_servo_position(port, pos);
         msleep(dt);
-    } while (abs(pos - target) < 5);
+    } while (abs(pos - target) > 5);
     set_servo_position(port, target);
 }
 
@@ -41,6 +41,9 @@ pthread_t set_servo_pos_millis_async(int port, int target, int millis) {
     data->port = port;
     data->target = target;
     data->millis = millis;
-    pthread_create(&t, NULL, set_servo_pos_millis_thread, data);
+    if (pthread_create(&t, NULL, set_servo_pos_millis_thread, data) != 0) {
+        fprintf(stderr, "utils: fatal error: error creating pthread object\n");
+        exit(EXIT_FAILURE);
+    }
     return t;
 }

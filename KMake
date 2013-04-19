@@ -1,0 +1,27 @@
+# On-Kovan Makefile
+
+SORTER=sorter-main.c utils.c
+ALL_OFF=all-off.c
+
+SORTER_OBJECTS=$(SORTER:.c=.o)
+ALL_OFF_OBJECTS=$(ALL_OFF:.c=.o)
+
+CC=gcc
+CFLAGS=-Wall
+LDFLAGS=-lkovan -lpthread
+
+all: sorter all-off
+
+sorter: $(SORTER_OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(SORTER_OBJECTS) -o sorter-main
+
+all-off: $(ALL_OFF_OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(ALL_OFF_OBJECTS) -o all-off
+
+install: sorter-install all-off-install
+
+sorter-install: sorter
+	cp sorter-main /kovan/binaries/
+
+all-off-install: all-off
+	cp all-off /kovan/binaries/

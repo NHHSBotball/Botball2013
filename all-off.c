@@ -7,6 +7,8 @@
 int main(int argc, char** argv) {
     alloff();
     disable_servos();
+    create_stop();
+    create_disconnect();
     return 0;
 }
 
