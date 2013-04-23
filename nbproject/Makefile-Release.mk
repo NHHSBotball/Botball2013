@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/all-off.o \
+	${OBJECTDIR}/scooper-drive-utils.o \
 	${OBJECTDIR}/scooper-main.o \
 	${OBJECTDIR}/sorter-main.o \
 	${OBJECTDIR}/utils.o
@@ -69,6 +70,11 @@ ${OBJECTDIR}/all-off.o: all-off.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/all-off.o all-off.c
+
+${OBJECTDIR}/scooper-drive-utils.o: scooper-drive-utils.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/scooper-drive-utils.o scooper-drive-utils.c
 
 ${OBJECTDIR}/scooper-main.o: scooper-main.c 
 	${MKDIR} -p ${OBJECTDIR}

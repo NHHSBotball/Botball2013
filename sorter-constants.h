@@ -4,6 +4,15 @@
 
 #include "constants.h"
 
+#define kCalibrationFactorDrive          1.0
+#define kCalibrationFactorDriveLeft      1.0
+#define kCalibrationFactorDriveRight     1.0
+#define kCalibrationFactorSpin           1.0
+#define kCalibrationConstantDrive        0.0
+#define kCalibrationConstantDriveLeft    0.0
+#define kCalibrationConstantDriveRight   0.0
+#define kCalibrationConstantSpin         0.0
+
 #define kServoPortSorter 0
 #define kServoPortBayLeft 1
 #define kServoPortBayRight 2
