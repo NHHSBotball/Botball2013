@@ -17,16 +17,19 @@ void wait_for_kill(void);
 
 int main(int argc, char** argv) {
     enable_servo(kServoPortSorter);
-    enable_servo(kServoPortBayLeft);
-    enable_servo(kServoPortBayRight);
     set_servo_position(kServoPortSorter, kServoPositionSorterCenter);
+    clear_motor_position_counter(kMotorPortBayLeft);
+    clear_motor_position_counter(kMotorPortBayRight);
     create_connect();
     camera_open(LOW_RES);
     
-    pthread_t left = set_servo_pos_millis_async(kServoPortBayLeft, kServoPositionBayLeftHorizontal, 2000);
-    pthread_t right = set_servo_pos_millis_async(kServoPortBayRight, kServoPositionBayRightHorizontal, 2000);
-    pthread_join(left, NULL);
-    pthread_join(right, NULL);
+    motor(kMotorPortBayLeft, 10);
+    motor(kMotorPortBayRight, 10);
+    while (get_motor_position_counter(kMotorPortBayLeft) < 230 || get_motor_position_counter(kMotorPortBayRight) < 230) {
+        printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
+    }
+    motor(kMotorPortBayLeft, 0);
+    motor(kMotorPortBayLeft, 0);
     wait_for_side_button();
     
     thread all_off = thread_create(wait_for_kill);
@@ -43,17 +46,23 @@ int main(int argc, char** argv) {
 }
 
 void raise_bay(void) {
-    pthread_t left = set_servo_pos_millis_async(kServoPortBayLeft, kServoPositionBayLeftVertical, 2500);
-    pthread_t right = set_servo_pos_millis_async(kServoPortBayRight, kServoPositionBayRightVertical, 2500);
-    pthread_join(left, NULL);
-    pthread_join(right, NULL);
+    motor(kMotorPortBayLeft, -20);
+    motor(kMotorPortBayRight, -20);
+    while (get_motor_position_counter(kMotorPortBayLeft) > 30 || get_motor_position_counter(kMotorPortBayRight) > 30) {
+        printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
+    }
+    motor(kMotorPortBayLeft, 0);
+    motor(kMotorPortBayLeft, 0);
 }
 
 void lower_bay(void) {
-    pthread_t left = set_servo_pos_millis_async(kServoPortBayLeft, kServoPositionBayLeftHorizontal, 2500);
-    pthread_t right = set_servo_pos_millis_async(kServoPortBayRight, kServoPositionBayRightHorizontal, 2500);
-    pthread_join(left, NULL);
-    pthread_join(right, NULL);
+    motor(kMotorPortBayLeft, 10);
+    motor(kMotorPortBayRight, 10);
+    while (get_motor_position_counter(kMotorPortBayLeft) < 230 || get_motor_position_counter(kMotorPortBayRight) < 230) {
+        printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
+    }
+    motor(kMotorPortBayLeft, 0);
+    motor(kMotorPortBayLeft, 0);
 }
 
 void start_spinner(void) {
@@ -101,6 +110,11 @@ void jiggle_create(void) {
 
 void wait_for_kill(void) {
     while (!side_button()) {}
+    alloff();
+    motor(0, 0);
+    motor(1, 0);
+    motor(2, 0);
+    motor(3, 0);
     alloff();
     disable_servos();
     create_drive_direct(0, 0);
