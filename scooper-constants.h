@@ -4,8 +4,9 @@
 
 #include "constants.h"
 
-#define SCOOPER_RADIUS 42.0
+#define SCOOPER_RADIUS 85.0
 
+#define kCalibrationFactorPower          1.0
 #define kCalibrationFactorDrive          1.0
 #define kCalibrationFactorDriveLeft      1.0
 #define kCalibrationFactorDriveRight     1.0
