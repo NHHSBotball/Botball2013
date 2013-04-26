@@ -1,27 +1,35 @@
 # On-Kovan Makefile
 
 SORTER=sorter-main.c utils.c
+SCOOPER=scooper-main.c utils.c scooper-drive-utils.c scooper-scoop-utils.c
 ALL_OFF=all-off.c
 
 SORTER_OBJECTS=$(SORTER:.c=.o)
 ALL_OFF_OBJECTS=$(ALL_OFF:.c=.o)
+SCOOPER_OBJECTS=$(SCOOPER:.c=.o)
 
 CC=gcc
 CFLAGS=-Wall
 LDFLAGS=-lkovan -lpthread
 
-all: sorter all-off
+all: sorter all-off scooper
 
 sorter: $(SORTER_OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(SORTER_OBJECTS) -o sorter-main
 
+scooper: $(SCOOPER_OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(SCOOPER_OBJECTS) -o scooper-main
+
 all-off: $(ALL_OFF_OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(ALL_OFF_OBJECTS) -o all-off
 
-install: sorter-install all-off-install
+install: sorter-install all-off-install scooper-install
 
 sorter-install: sorter
 	cp sorter-main /kovan/binaries/
 
 all-off-install: all-off
 	cp all-off /kovan/binaries/
+
+scooper-install: scooper
+	cp scooper-main /kovan/binaries/

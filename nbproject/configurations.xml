@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>constants.h</itemPath>
       <itemPath>drive-utils.h</itemPath>
+      <itemPath>scoop-utils.h</itemPath>
       <itemPath>scooper-constants.h</itemPath>
       <itemPath>sorter-constants.h</itemPath>
       <itemPath>utils.h</itemPath>
@@ -20,6 +21,7 @@
       <itemPath>all-off.c</itemPath>
       <itemPath>scooper-drive-utils.c</itemPath>
       <itemPath>scooper-main.c</itemPath>
+      <itemPath>scooper-scoop-utils.c</itemPath>
       <itemPath>sorter-main.c</itemPath>
       <itemPath>utils.c</itemPath>
     </logicalFolder>
@@ -41,8 +43,6 @@
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
-        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
       </compileType>
@@ -52,11 +52,15 @@
       </item>
       <item path="drive-utils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="scoop-utils.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="scooper-constants.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="scooper-drive-utils.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scooper-main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="scooper-scoop-utils.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="sorter-constants.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -71,8 +75,6 @@
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
-        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
@@ -94,11 +96,15 @@
       </item>
       <item path="drive-utils.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="scoop-utils.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="scooper-constants.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="scooper-drive-utils.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="scooper-main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="scooper-scoop-utils.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="sorter-constants.h" ex="false" tool="3" flavor2="0">
       </item>

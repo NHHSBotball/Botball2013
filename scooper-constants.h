@@ -16,8 +16,21 @@
 #define kServoPortScoopLeft 0
 #define kServoPortScoopRight 1
 #define kServoPortScoopTilt 2
+#define kServoPortScoopDoor 3
 #define kMotorPortDriveLeft 0
-#define kMotorPortDriveRight 1
+#define kMotorPortDriveRight 2
+
+#define kServoPositionScoopBottomLeft 1000
+#define kServoPositionScoopBottomRight (2047 - kServoPositionScoopLeft)
+#define kServoPositionScoopTopLeft 168
+#define kServoPositionScoopTopRight (2047 - kServoPositionScoopTopLeft)
+
+#define kServoPositionScoopTiltLow 475
+#define kServoPositionScoopTiltHigh 1475
+
+#define kServoPositionScoopDoorOpen 0
+#define kServoPositionScoopDoorClosed 2047
+
 
 #endif	/* SCOOPER_CONSTANTS_H */
 
