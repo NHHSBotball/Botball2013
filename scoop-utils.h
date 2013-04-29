@@ -26,6 +26,11 @@
 
 void lower_scoop();
 void raise_scoop();
+void tilt_scoop_low();
+void tilt_scoop_high();
+void tilt_scoop_dump();
+void open_scoop_doors();
+void close_scoop_doors();
 void scoop();
 
 #endif	/* DRIVE_UTILS_H */

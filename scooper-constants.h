@@ -4,33 +4,38 @@
 
 #include "constants.h"
 
-#define SCOOPER_RADIUS 85.0
+#define SCOOPER_RADIUS 37.5
 
-#define kCalibrationFactorPower          1.0
 #define kCalibrationFactorDrive          1.0
 #define kCalibrationFactorDriveLeft      1.0
-#define kCalibrationFactorDriveRight     1.0
-#define kCalibrationConstantDrive        0.0
-#define kCalibrationConstantDriveLeft    0.0
-#define kCalibrationConstantDriveRight   0.0
+#define kCalibrationFactorDriveRight     0.96
+#define kCalibrationFactorTicks          5.28
+#define kCalibrationFactorTicksLeft      1.0
+#define kCalibrationFactorTicksRight     0.975
+#define kCalibrationConstantTicks        0.0
+#define kCalibrationConstantTicksLeft    0.0
+#define kCalibrationConstantTicksRight   0.0
+#define kCalibrationFactorPower          5.20
 
-#define kServoPortScoopLeft 0
-#define kServoPortScoopRight 1
-#define kServoPortScoopTilt 2
-#define kServoPortScoopDoor 3
-#define kMotorPortDriveLeft 0
-#define kMotorPortDriveRight 2
+#define kServoPortScoopLeft 2
+#define kServoPortScoopRight 0
+#define kServoPortScoopTiltLeft 3
+#define kServoPortScoopTiltRight 1
+#define kMotorPortScoopDoor 3
+#define kMotorPortDriveLeft 2
+#define kMotorPortDriveRight 0
 
 #define kServoPositionScoopBottomLeft 1000
-#define kServoPositionScoopBottomRight (2047 - kServoPositionScoopLeft)
+#define kServoPositionScoopBottomRight (2047 - kServoPositionScoopBottomLeft)
 #define kServoPositionScoopTopLeft 168
 #define kServoPositionScoopTopRight (2047 - kServoPositionScoopTopLeft)
 
-#define kServoPositionScoopTiltLow 475
-#define kServoPositionScoopTiltHigh 1475
+#define kServoPositionScoopTiltLow 450
+#define kServoPositionScoopTiltHigh 0
+#define kServoPositionScoopTiltDump 1475
 
-#define kServoPositionScoopDoorOpen 0
-#define kServoPositionScoopDoorClosed 2047
+#define kServoPositionScoopDoorOpen 2047
+#define kServoPositionScoopDoorClosed 0
 
 
 #endif	/* SCOOPER_CONSTANTS_H */

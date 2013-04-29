@@ -11,16 +11,15 @@
 /**
  * Calibratable Movement Utils Functions
  * Units:
- *   duration : milliseconds
  *   distance : millimeters
  *   angle    : radians
  * To calibrate, change the preprocessor definitions at the top
  * of the respective constants files.
  */
 
-void drive_straight(int duration, int distance);
-void drive_arc(int duration, int radius, int angle);
-void drive_spin(int duration, int angle);
+void drive_straight(int distance);
+void drive_arc(int radius, double angle);
+void drive_spin(double angle);
 
 #endif	/* DRIVE_UTILS_H */
 
