@@ -8,7 +8,7 @@
 
 #define kCalibrationFactorDrive          1.0
 #define kCalibrationFactorDriveLeft      1.0
-#define kCalibrationFactorDriveRight     0.96
+#define kCalibrationFactorDriveRight     0.973
 #define kCalibrationFactorTicks          5.28
 #define kCalibrationFactorTicksLeft      1.0
 #define kCalibrationFactorTicksRight     0.975
@@ -21,21 +21,21 @@
 #define kServoPortScoopRight 0
 #define kServoPortScoopTiltLeft 3
 #define kServoPortScoopTiltRight 1
+
 #define kMotorPortScoopDoor 3
 #define kMotorPortDriveLeft 2
 #define kMotorPortDriveRight 0
 
 #define kServoPositionScoopBottomLeft 1000
 #define kServoPositionScoopBottomRight (2047 - kServoPositionScoopBottomLeft)
-#define kServoPositionScoopTopLeft 168
+#define kServoPositionScoopTopLeft 130
 #define kServoPositionScoopTopRight (2047 - kServoPositionScoopTopLeft)
 
 #define kServoPositionScoopTiltLow 450
-#define kServoPositionScoopTiltHigh 0
+#define kServoPositionScoopTiltHigh 900
 #define kServoPositionScoopTiltDump 1475
 
-#define kServoPositionScoopDoorOpen 2047
-#define kServoPositionScoopDoorClosed 0
+#define kMotorPositionScoopDoor 560
 
 
 #endif	/* SCOOPER_CONSTANTS_H */

@@ -9,20 +9,17 @@ void drive_off(int port);
 
 void drive_straight(int distance) {
     double target_left = distance * kCalibrationFactorTicks * kCalibrationFactorTicksLeft + kCalibrationConstantTicks + kCalibrationConstantTicksLeft;
-    double target_right = distance * kCalibrationFactorTicks * kCalibrationFactorTicksRight + kCalibrationConstantTicks + kCalibrationConstantTicksRight;
+    //double target_right = distance * kCalibrationFactorTicks * kCalibrationFactorTicksRight + kCalibrationConstantTicks + kCalibrationConstantTicksRight;
     clear_motor_position_counter(kMotorPortDriveLeft);
     clear_motor_position_counter(kMotorPortDriveRight);
     motor(kMotorPortDriveLeft, (int) (100 * (distance < 0 ? -1 : 1) * kCalibrationFactorDrive * kCalibrationFactorDriveLeft));
     motor(kMotorPortDriveRight, (int) (100 * (distance < 0 ? -1 : 1) * kCalibrationFactorDrive * kCalibrationFactorDriveRight));
     bool done_left = false;
-    bool done_right = false;
-    while(!done_left || !done_right) {
+    //bool done_right = false;
+    while(!done_left) {
         if (!done_left && get_motor_position_counter(kMotorPortDriveLeft) / (double) target_left >= 1.0) {
             done_left = true;
             drive_off(kMotorPortDriveLeft);
-        }
-        if (!done_right && get_motor_position_counter(kMotorPortDriveRight) / (double) target_right >= 1.0) {
-            done_right = true;
             drive_off(kMotorPortDriveRight);
         }
     }

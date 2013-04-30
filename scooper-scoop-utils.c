@@ -5,14 +5,56 @@
 #include "utils.h"
 #include "scoop-utils.h"
 
+
 void lower_scoop() {
-    set_servo_position(kServoPortScoopLeft, kServoPositionScoopBottomLeft);
-    set_servo_position(kServoPortScoopRight, kServoPositionScoopBottomRight);
+    int time = 800;
+    pthread_t threadLeft = set_servo_pos_millis_async(kServoPortScoopLeft, kServoPositionScoopBottomLeft, time);
+    pthread_t threadRight = set_servo_pos_millis_async(kServoPortScoopRight, kServoPositionScoopBottomRight, time);
+    msleep(time);
+    pthread_cancel(threadLeft);
+    pthread_cancel(threadRight);
+    
+    //set_servo_position(kServoPortScoopLeft, kServoPositionScoopBottomLeft);
+    //set_servo_position(kServoPortScoopRight, kServoPositionScoopBottomRight);
 }
 
 void raise_scoop() {
-    set_servo_position(kServoPortScoopLeft, kServoPositionScoopTopLeft);
-    set_servo_position(kServoPortScoopRight, kServoPositionScoopTopRight);
+    int time = 800;
+    pthread_t threadLeft = set_servo_pos_millis_async(kServoPortScoopLeft, kServoPositionScoopTopLeft, time);
+    pthread_t threadRight = set_servo_pos_millis_async(kServoPortScoopRight, kServoPositionScoopTopRight, time);
+    msleep(time);
+    pthread_cancel(threadLeft);
+    pthread_cancel(threadRight);
+}
+
+void raise_scoop_level() {
+    int time = 800;
+    pthread_t threadLeft = set_servo_pos_millis_async(kServoPortScoopLeft, kServoPositionScoopTopLeft, time);
+    pthread_t threadRight = set_servo_pos_millis_async(kServoPortScoopRight, kServoPositionScoopTopRight, time);
+    
+    pthread_t tiltThreadLeft = set_servo_pos_millis_async(kServoPortScoopTiltLeft, kServoPositionScoopTiltHigh, time);
+    pthread_t tiltThreadRight = set_servo_pos_millis_async(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltHigh, time);
+    
+    msleep(time);
+    pthread_cancel(tiltThreadLeft);
+    pthread_cancel(tiltThreadRight);
+    pthread_cancel(threadLeft);
+    pthread_cancel(threadRight);
+}
+
+void lower_scoop_level() {
+    int time = 800;
+    pthread_t threadLeft = set_servo_pos_millis_async(kServoPortScoopLeft, kServoPositionScoopBottomLeft, time);
+    pthread_t threadRight = set_servo_pos_millis_async(kServoPortScoopRight, kServoPositionScoopBottomRight, time);
+    
+    pthread_t tiltThreadLeft = set_servo_pos_millis_async(kServoPortScoopTiltLeft, kServoPositionScoopTiltLow, time);
+    pthread_t tiltThreadRight = set_servo_pos_millis_async(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltLow, time);
+    
+    msleep(time);
+    pthread_cancel(tiltThreadLeft);
+    pthread_cancel(tiltThreadRight);
+    pthread_cancel(threadLeft);
+    pthread_cancel(threadRight);
 }
 
 void tilt_scoop_low() {
@@ -34,7 +76,7 @@ void open_scoop_doors() {
     clear_motor_position_counter(kMotorPortScoopDoor);
     msleep(50);
     motor(kMotorPortScoopDoor, 100);
-    while (get_motor_position_counter(kMotorPortScoopDoor) < 600) {}
+    while (get_motor_position_counter(kMotorPortScoopDoor) < kMotorPositionScoopDoor) {} //500
     motor(kMotorPortScoopDoor, 0);
 }
 
@@ -42,7 +84,7 @@ void close_scoop_doors() {
     clear_motor_position_counter(kMotorPortScoopDoor);
     msleep(50);
     motor(kMotorPortScoopDoor, -100);
-    while (get_motor_position_counter(kMotorPortScoopDoor) >  -700) {}
+    while (get_motor_position_counter(kMotorPortScoopDoor) >  -kMotorPositionScoopDoor) {} //700
     motor(kMotorPortScoopDoor, 0);
 }
 
