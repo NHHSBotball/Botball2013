@@ -30,12 +30,36 @@ int main(int argc, char** argv) {
     }
     motor(kMotorPortBayLeft, 0);
     motor(kMotorPortBayLeft, 0);
-    wait_for_side_button();
+    // wait_for_side_button();
+    
+    create_drive_straight(200);
+    msleep(2000);
+    create_spin_CCW(200);
+    msleep(750);
+    create_drive_straight(-200);
+    msleep(1500);
+    create_spin_CW(200);
+    msleep(1450);
+    create_drive_straight(200);
+    while (!get_create_lbump() && !get_create_rbump()) {}
+    create_drive_straight(-100);
+    msleep(200);
+    create_spin_CCW(200);
+    msleep(500);
+    create_stop();
+    
+    msleep(15000);
     
     thread all_off = thread_create(wait_for_kill);
     thread_start(all_off);
     
     raise_bay();
+    create_spin_CW(100);
+    msleep(500);
+    create_drive_straight(-100);
+    msleep(1000);
+    create_stop();
+    
     thread jiggle_c = thread_create(jiggle_create);
     thread_start(jiggle_c);
     sort_balls();
@@ -46,8 +70,8 @@ int main(int argc, char** argv) {
 }
 
 void raise_bay(void) {
-    motor(kMotorPortBayLeft, -20);
-    motor(kMotorPortBayRight, -20);
+    motor(kMotorPortBayLeft, -40);
+    motor(kMotorPortBayRight, -40);
     while (get_motor_position_counter(kMotorPortBayLeft) > 30 || get_motor_position_counter(kMotorPortBayRight) > 30) {
         printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
     }
