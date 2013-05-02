@@ -12,64 +12,34 @@ void startup_servos(void);
 int main(int argc, char** argv) {
     
     startup_servos();
-    drive_straight(320);
-    
+    drive_straight(440);//old value 320
+    /*//to be replaced with tick thing
     motor(kMotorPortDriveLeft, 100);
     motor(kMotorPortDriveRight, 5);
     msleep(2430);
     motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
+    motor(kMotorPortDriveRight, 0);*/
+    
+    turn_ticks(50, 1280);
     
     // pile 1
     open_scoop_doors();
     lower_scoop();
     tilt_scoop_low();
-    drive_straight(230);
+    drive_straight(260);
     close_scoop_doors();
     raise_scoop_level();
     
-    /*// cube
-    drive_straight(50);
-    open_scoop_doors();
-    tilt_scoop_low();
-    motor(kMotorPortDriveLeft, 50);
-    motor(kMotorPortDriveRight, -50);
-    msleep(500);
-    motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
-    close_scoop_doors();
-    motor(kMotorPortDriveLeft, 50);
-    motor(kMotorPortDriveRight, -50);
-    msleep(500);
-    motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
-    return 0;*/
-    
-    /*//Reverse to pile 2
-    
-    drive_straight(-350);
-    motor(kMotorPortDriveLeft, 50);
-    motor(kMotorPortDriveRight, -50);
-    msleep(350);
-    motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
-    
-//    drive_straight(100);*/
     
     
-    drive_straight(-200);
-    motor(kMotorPortDriveLeft, -50);
-    motor(kMotorPortDriveRight, 50);
-    msleep(800);
-     motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
-    drive_straight(-230);
+    //Reverse to pile 2
     
-    motor(kMotorPortDriveLeft, 50);
-    motor(kMotorPortDriveRight, -50);
-    msleep(800);
-     motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
+    
+    drive_straight(-240);
+    turn_ticks(50, -700);
+    drive_straight(-310);
+    
+    turn_ticks(50, 740);
     lower_scoop_level();
     open_scoop_doors();
     
@@ -77,36 +47,40 @@ int main(int argc, char** argv) {
     
     //lower_scoop();
     //tilt_scoop_low();
-    drive_straight(260);
+    drive_straight(145);
     close_scoop_doors();
-    raise_scoop_level();
-    
-    /*
-    // old pile 2
-    drive_straight(275);
-    open_scoop_doors();
-    tilt_scoop_low();
+    raise_scoop_level(); 
     drive_straight(250);
-    close_scoop_doors();
-    tilt_scoop_high();
     
-    drive_straight(-750);
+    raise_scoop_very_high();
+    open_doors_wide();
     
-    motor(kMotorPortDriveLeft, -100);
-    motor(kMotorPortDriveRight, -5);
-    msleep(2300);
-    motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
+    turn_ticks(50, 500);
+    drive_straight(-50);
+
+    //set_servo_position(kServoPortScoopTiltLeft, kServoPositionScoopTiltHigh - 300);
+    //set_servo_position(kServoPortScoopTiltLeft, (2047 - kServoPositionScoopTiltHigh) + 300);
+    turn_ticks(50, 555);
     
-    drive_straight(-400);
     
-    motor(kMotorPortDriveLeft, 100);
-    motor(kMotorPortDriveRight, -50);
-    msleep(1000);
-    motor(kMotorPortDriveLeft, 0);
-    motor(kMotorPortDriveRight, 0);
+    // drive_straight(50);
     
-    return 0;*/
+    dump();
+    msleep(500);
+    dump_shake();
+    dump();
+    dump_shake();
+    dump();
+    return 0;
+    
+    //raise_scoop();
+    raise_scoop_very_high();
+    drive_straight(-100);
+    turn_ticks(50, -800);
+    lower_scoop_level();
+    drive_straight(1000);
+    turn_ticks(100, -1000);
+    turn_ticks(100, 1000);
 }
 
 void startup_servos(void) {

@@ -6,6 +6,22 @@
 
 // void drive_at_velocity(int port, int vel);
 void drive_off(int port);
+void turn_ticks(int power, int ticks) {
+    
+    if (ticks > 0) {
+        clear_motor_position_counter(kMotorPortDriveLeft);
+        motor(kMotorPortDriveLeft, power);
+        while (get_motor_position_counter(kMotorPortDriveLeft) < ticks) {}
+        motor(kMotorPortDriveLeft, 0);
+    }
+    else if (ticks < 0) {
+        clear_motor_position_counter(kMotorPortDriveRight);
+        motor(kMotorPortDriveRight, power);
+        while (get_motor_position_counter(kMotorPortDriveRight) < -ticks) {}
+        motor(kMotorPortDriveRight, 0);
+    }
+    
+}
 
 void drive_straight(int distance) {
     double target_left = distance * kCalibrationFactorTicks * kCalibrationFactorTicksLeft + kCalibrationConstantTicks + kCalibrationConstantTicksLeft;
