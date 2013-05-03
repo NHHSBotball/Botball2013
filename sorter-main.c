@@ -32,6 +32,8 @@ int main(int argc, char** argv) {
     motor(kMotorPortBayLeft, 0);
     // wait_for_side_button();
     
+    msleep(6000);
+    
     create_drive_straight(200);
     msleep(2000);
     create_spin_CCW(200);
@@ -42,13 +44,15 @@ int main(int argc, char** argv) {
     msleep(1450);
     create_drive_straight(200);
     while (!get_create_lbump() && !get_create_rbump()) {}
-    create_drive_straight(-100);
-    msleep(200);
+    create_drive_straight(-150);
+    msleep(900);
     create_spin_CCW(200);
-    msleep(500);
+    msleep(1000);
+    create_drive_straight(150);
+    while (!get_create_lbump() && !get_create_rbump()) {}
     create_stop();
     
-    msleep(15000);
+    msleep(10000);
     
     thread all_off = thread_create(wait_for_kill);
     thread_start(all_off);
@@ -125,9 +129,9 @@ void sort_balls(void) {
 
 void jiggle_create(void) {
     while (true) {
-        create_drive_direct(150, -150);
+        create_drive_direct(180, -180);
         msleep(5);
-        create_drive_direct(-150, 150);
+        create_drive_direct(-180, 180);
         msleep(5);
     }
 }
