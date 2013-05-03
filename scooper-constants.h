@@ -36,7 +36,7 @@
 #define kServoPositionScoopTiltLow 300
 #define kServoPositionScoopTiltHigh 600
 #define kServoPositionScoopTiltVeryHigh 1200
-#define kServoPositionScoopTiltDump 2047
+#define kServoPositionScoopTiltDump 1410
 #define kServoPositionScoopTiltDumpLow 900
 
 #define kMotorPositionScoopDoor 560

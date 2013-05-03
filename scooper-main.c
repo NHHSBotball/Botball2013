@@ -10,21 +10,34 @@
 void startup_servos(void);
 
 int main(int argc, char** argv) {
-    
     startup_servos();
-    drive_straight(440);//old value 320
+    open_doors_wide();
+    drive_straight(-50);
+    
+    lower_scoop_level();
+    
+    drive_straight(300);
+    //close_scoop_doors();
+    raise_scoop_very_high();
+    drive_straight(185);//old value 320
     /*//to be replaced with tick thing
     motor(kMotorPortDriveLeft, 100);
     motor(kMotorPortDriveRight, 5);
     msleep(2430);
     motor(kMotorPortDriveLeft, 0);
     motor(kMotorPortDriveRight, 0);*/
-    
-    turn_ticks(50, 1280);
+    //dump();
+    //close_scoop_doors();
+    //open_scoop_doors();
+    //dump();
+    //msleep(800);
+    raise_scoop_level();
+    close_doors_wide();
+    turn_ticks(50, 1058);
     
     // pile 1
     open_scoop_doors();
-    lower_scoop();
+    lower_scoop_time(2000);
     tilt_scoop_low();
     drive_straight(260);
     close_scoop_doors();
@@ -44,19 +57,15 @@ int main(int argc, char** argv) {
     open_scoop_doors();
     
     //pick up pile 2
-    
-    //lower_scoop();
-    //tilt_scoop_low();
-    drive_straight(145);
+    drive_straight(155);
     close_scoop_doors();
     raise_scoop_level(); 
     drive_straight(250);
     
     raise_scoop_very_high();
-    open_doors_wide();
     
     turn_ticks(50, 500);
-    drive_straight(-50);
+    drive_straight(-60);
 
     //set_servo_position(kServoPortScoopTiltLeft, kServoPositionScoopTiltHigh - 300);
     //set_servo_position(kServoPortScoopTiltLeft, (2047 - kServoPositionScoopTiltHigh) + 300);
@@ -65,28 +74,51 @@ int main(int argc, char** argv) {
     
     // drive_straight(50);
     
+    open_doors_wide();
     dump();
     msleep(500);
     dump_shake();
     dump();
     dump_shake();
     dump();
-    return 0;
     
     //raise_scoop();
     raise_scoop_very_high();
-    drive_straight(-100);
-    turn_ticks(50, -800);
+    
+    drive_straight(-300);
+    close_doors_wide();
+    turn_ticks_in_place(50, -1050);
+    
+    
+    //drive to pile 3
     lower_scoop_level();
-    drive_straight(1000);
-    turn_ticks(100, -1000);
-    turn_ticks(100, 1000);
+    open_scoop_doors();
+    drive_straight(500);
+    
+    //pick up pile 3
+    close_scoop_doors();
+    raise_scoop_level();
+    drive_straight(-500);
+    return 0;
+    
+    turn_ticks_in_place(50, -475);
+    drive_straight(-200);
+    turn_ticks_in_place(50, 475);
+    drive_straight(400);
+    //pick up pile 4
+    lower_scoop_level();
+    
+    drive_straight(500);
+    open_scoop_doors();
+    
 }
 
 void startup_servos(void) {
     enable_servos();
-    raise_scoop();
-    tilt_scoop_low();
-    msleep(500);
+    set_servo_position(kServoPortScoopLeft, 2047 - 1706);
+    set_servo_position(kServoPortScoopRight, 1706);
+    set_servo_position(kServoPortScoopTiltLeft, 360);
+    set_servo_position(kServoPortScoopTiltRight, 2047 - 360);
+    scanf("%s", NULL);
 }
 

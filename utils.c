@@ -12,12 +12,18 @@ void wait_for_side_button(void) {
 }
 
 void set_servo_pos_millis(int port, int target, int millis) {
-    int pos = get_servo_position(port);
-    if (target == pos) return;
+    int pos = -1;
+    while (pos < 0 || pos > 2047) pos = get_servo_position(port);
+    if (target == pos) {
+        msleep(millis);
+        return;
+    }
     int dx = pos < target ? 5 : -5;
     int dt = millis * 5 / abs(pos - target);
+    printf("%i: starting pos: %i, target: %i, millis: %i, dx: %i, dt: %i\n", port, pos, target, millis, dx, dt);
     do {
         pos += dx;
+        // printf("%i: %i\n", port, pos);
         set_servo_position(port, pos);
         msleep(dt);
     } while (abs(pos - target) > 5);
