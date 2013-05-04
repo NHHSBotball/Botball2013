@@ -23,6 +23,12 @@ int main(int argc, char** argv) {
     create_connect();
     camera_open(LOW_RES);
     
+    scanf("%s", NULL);
+    printf("waiting for light\n");
+    while (analog(0) > 200) {}
+    
+    shut_down_in(700000);
+    
     motor(kMotorPortBayLeft, 10);
     motor(kMotorPortBayRight, 10);
     while (get_motor_position_counter(kMotorPortBayLeft) < 230 || get_motor_position_counter(kMotorPortBayRight) < 230) {
@@ -35,19 +41,19 @@ int main(int argc, char** argv) {
     msleep(6000);
     
     create_drive_straight(200);
-    msleep(2000);
+    msleep(1850);
     create_spin_CCW(200);
     msleep(750);
     create_drive_straight(-200);
     msleep(1500);
     create_spin_CW(200);
-    msleep(1450);
+    msleep(1750);
     create_drive_straight(200);
     while (!get_create_lbump() && !get_create_rbump()) {}
     create_drive_straight(-150);
     msleep(900);
     create_spin_CCW(200);
-    msleep(1000);
+    msleep(950);
     create_drive_straight(150);
     while (!get_create_lbump() && !get_create_rbump()) {}
     create_stop();
@@ -66,11 +72,14 @@ int main(int argc, char** argv) {
     
     thread jiggle_c = thread_create(jiggle_create);
     thread_start(jiggle_c);
-    thread_create(sort_balls);
+    thread sort_b = thread_create(sort_balls);
+    thread_start(sort_b);
     
     msleep(33000);
     
-    thread_destroy(jiggle_c);
+    while (true) {}
+    
+    /*thread_destroy(jiggle_c);
     create_stop();
     lower_bay();
     create_drive_straight(100);
@@ -92,7 +101,7 @@ int main(int argc, char** argv) {
     
     while (true) {}
     
-    camera_close();
+    camera_close();*/
     return 0;
 }
 
@@ -101,9 +110,9 @@ void raise_bay(void) {
         motor(kMotorPortBayLeft, -50);
         motor(kMotorPortBayRight, -50);
         msleep(200);
-        motor(kMotorPortBayLeft, 0);
-        motor(kMotorPortBayRight, 0);
-        msleep(200);
+        //motor(kMotorPortBayLeft, 0);
+        //motor(kMotorPortBayRight, 0);
+        //msleep(200);
         printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
     }
     motor(kMotorPortBayLeft, 0);

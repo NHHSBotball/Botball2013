@@ -25,7 +25,7 @@ void close_doors_wide() {
     clear_motor_position_counter(kMotorPortScoopDoor);
     msleep(50);
     motor(kMotorPortScoopDoor, -100);
-    while (get_motor_position_counter(kMotorPortScoopDoor) > -(kMotorPositionScoopDoorWide + 50)) {} //500
+    while (get_motor_position_counter(kMotorPortScoopDoor) > -(kMotorPositionScoopDoorWide)) {} //was + 50
     motor(kMotorPortScoopDoor, 0);
 }
 

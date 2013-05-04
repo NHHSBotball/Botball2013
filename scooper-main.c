@@ -11,6 +11,11 @@ void startup_servos(void);
 
 int main(int argc, char** argv) {
     startup_servos();
+    //wait_for_light(0);
+    scanf("%s", NULL);
+    printf("waiting for light\n");
+    while (analog(0) > 200) {}
+    shut_down_in(700000);
     
     raise_scoop_level();
     
@@ -27,12 +32,12 @@ int main(int argc, char** argv) {
     //open_scoop_doors();
     //dump();
     //msleep(800);
-    turn_ticks_in_place(50, 750);
+    turn_ticks_in_place(50, 890);
     
     // pile 1
-    open_doors_narrow();
+    open_scoop_doors();
     lower_scoop_level();
-    drive_straight(370);
+    drive_straight(250);
     close_scoop_doors();
     raise_scoop_level();
     
@@ -44,14 +49,14 @@ int main(int argc, char** argv) {
     drive_straight(-290);
     turn_ticks(50, -700);
     drive_straight(-250);
-    set_servo_position(kServoPortScoopTiltLeft, kServoPositionScoopTiltHighBack);
-    set_servo_position(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltHighBack);
+    //set_servo_position(kServoPortScoopTiltLeft, kServoPositionScoopTiltHighBack);
+    //set_servo_position(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltHighBack);
     turn_ticks(50, 770);//this value
     lower_scoop_level();
     open_scoop_doors();
     
     //pick up pile 2
-    drive_straight(320);
+    drive_straight(270);
     close_scoop_doors();
     raise_scoop_level(); 
     drive_straight(80);
@@ -84,6 +89,7 @@ int main(int argc, char** argv) {
     
     //raise_scoop();
     drive_straight(-400);
+    return 0;
     raise_scoop_level();
     close_doors_wide();
     raise_scoop_very_high();
@@ -168,6 +174,5 @@ void startup_servos(void) {
     set_servo_position(kServoPortScoopRight, 1706);
     set_servo_position(kServoPortScoopTiltLeft, 800);
     set_servo_position(kServoPortScoopTiltLeft, 2047 - 800);
-    scanf("%s", NULL);
 }
 
