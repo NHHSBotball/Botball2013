@@ -66,17 +66,44 @@ int main(int argc, char** argv) {
     
     thread jiggle_c = thread_create(jiggle_create);
     thread_start(jiggle_c);
-    sort_balls();
+    thread_create(sort_balls);
+    
+    msleep(33000);
+    
+    thread_destroy(jiggle_c);
+    create_stop();
     lower_bay();
+    create_drive_straight(100);
+    while (!get_create_lbump() && !get_create_rbump()) {}
+    create_stop();
+    
+    msleep(10000);
+    
+    raise_bay();
+    create_spin_CW(100);
+    msleep(500);
+    create_drive_straight(-100);
+    msleep(1000);
+    create_stop();
+    
+    thread_create(jiggle_create);
+    thread_start(jiggle_c);
+    thread_create(sort_balls);
+    
+    while (true) {}
     
     camera_close();
     return 0;
 }
 
 void raise_bay(void) {
-    motor(kMotorPortBayLeft, -40);
-    motor(kMotorPortBayRight, -40);
     while (get_motor_position_counter(kMotorPortBayLeft) > 30 || get_motor_position_counter(kMotorPortBayRight) > 30) {
+        motor(kMotorPortBayLeft, -50);
+        motor(kMotorPortBayRight, -50);
+        msleep(200);
+        motor(kMotorPortBayLeft, 0);
+        motor(kMotorPortBayRight, 0);
+        msleep(200);
         printf("pos: %i/%i\n", get_motor_position_counter(kMotorPortBayLeft), get_motor_position_counter(kMotorPortBayRight));
     }
     motor(kMotorPortBayLeft, 0);

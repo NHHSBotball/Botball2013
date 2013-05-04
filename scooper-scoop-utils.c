@@ -13,11 +13,19 @@ void open_doors_wide() {
     motor(kMotorPortScoopDoor, 0);
 }
 
+void open_doors_narrow() {
+    clear_motor_position_counter(kMotorPortScoopDoor);
+    msleep(50);
+    motor(kMotorPortScoopDoor, 100);
+    while (get_motor_position_counter(kMotorPortScoopDoor) < 500) {} //500
+    motor(kMotorPortScoopDoor, 0);
+}
+
 void close_doors_wide() {
     clear_motor_position_counter(kMotorPortScoopDoor);
     msleep(50);
     motor(kMotorPortScoopDoor, -100);
-    while (get_motor_position_counter(kMotorPortScoopDoor) > -kMotorPositionScoopDoorWide) {} //500
+    while (get_motor_position_counter(kMotorPortScoopDoor) > -(kMotorPositionScoopDoorWide + 50)) {} //500
     motor(kMotorPortScoopDoor, 0);
 }
 
@@ -72,6 +80,21 @@ void lower_scoop_time(int time) {
     
     //set_servo_position(kServoPortScoopLeft, kServoPositionScoopBottomLeft);
     //set_servo_position(kServoPortScoopRight, kServoPositionScoopBottomRight);
+}
+
+void mid_scoop_level() {
+    int time = 800;
+    pthread_t threadLeft = set_servo_pos_millis_async(kServoPortScoopLeft, kServoPositionScoopMidLeft, time);
+    pthread_t threadRight = set_servo_pos_millis_async(kServoPortScoopRight, kServoPositionScoopMidRight, time);
+    
+    pthread_t tiltThreadLeft = set_servo_pos_millis_async(kServoPortScoopTiltLeft, kServoPositionScoopTiltLow, time);
+    pthread_t tiltThreadRight = set_servo_pos_millis_async(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltLow, time);
+    
+    msleep(time);
+    pthread_cancel(tiltThreadLeft);
+    pthread_cancel(tiltThreadRight);
+    pthread_cancel(threadLeft);
+    pthread_cancel(threadRight);
 }
 
 void raise_scoop() {
@@ -140,7 +163,7 @@ void close_scoop_doors() {
     clear_motor_position_counter(kMotorPortScoopDoor);
     msleep(50);
     motor(kMotorPortScoopDoor, -100);
-    while (get_motor_position_counter(kMotorPortScoopDoor) >  -kMotorPositionScoopDoor) {} //700
+    while (get_motor_position_counter(kMotorPortScoopDoor) >  -(kMotorPositionScoopDoor + 50)) {} //700
     motor(kMotorPortScoopDoor, 0);
 }
 

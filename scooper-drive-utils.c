@@ -23,20 +23,33 @@ void turn_ticks(int power, int ticks) {
     
 }
 
+void turn_ticks_inverse(int power, int ticks) {
+    
+    if (ticks < 0) {
+        clear_motor_position_counter(kMotorPortDriveLeft);
+        motor(kMotorPortDriveLeft, -power);
+        while (get_motor_position_counter(kMotorPortDriveLeft) > ticks) {}
+        motor(kMotorPortDriveLeft, 0);
+    } else if (ticks > 0) {
+        clear_motor_position_counter(kMotorPortDriveRight);
+        motor(kMotorPortDriveRight, -power);
+        while (get_motor_position_counter(kMotorPortDriveRight) > -ticks) {}
+        motor(kMotorPortDriveRight, 0);
+    }
+    
+}
+
 void turn_ticks_in_place(int power, int ticks) {
     ticks = ticks / 2;
     clear_motor_position_counter(kMotorPortDriveRight);
     clear_motor_position_counter(kMotorPortDriveLeft);
     if (ticks > 0) {
-        
         motor(kMotorPortDriveLeft, power);
         motor(kMotorPortDriveRight, -power);
         while (get_motor_position_counter(kMotorPortDriveLeft) < ticks) {}
         motor(kMotorPortDriveLeft, 0);
         motor(kMotorPortDriveRight, 0);
-    }
-    else if (ticks < 0) {
-        
+    } else if (ticks < 0) {
         motor(kMotorPortDriveRight, power);
         motor(kMotorPortDriveLeft, -power);
         while (get_motor_position_counter(kMotorPortDriveRight) < -ticks) {}
