@@ -14,15 +14,15 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=clang
-CCC=clang++
-CXX=clang++
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=CLang-MacOSX
-CND_DLIB_EXT=dylib
+CND_PLATFORM=MinGW-Windows
+CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -34,15 +34,7 @@ include Makefile
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES= \
-	${OBJECTDIR}/all-off.o \
-	${OBJECTDIR}/motor-test.o \
-	${OBJECTDIR}/scooper-drive-utils.o \
-	${OBJECTDIR}/scooper-main.o \
-	${OBJECTDIR}/scooper-scoop-utils.o \
-	${OBJECTDIR}/sorter-drive-utils.o \
-	${OBJECTDIR}/sorter-main.o \
-	${OBJECTDIR}/utils.o
+OBJECTFILES=
 
 
 # C Compiler Flags
@@ -63,51 +55,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013 ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/all-off.o: all-off.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/all-off.o all-off.c
-
-${OBJECTDIR}/motor-test.o: motor-test.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/motor-test.o motor-test.c
-
-${OBJECTDIR}/scooper-drive-utils.o: scooper-drive-utils.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/scooper-drive-utils.o scooper-drive-utils.c
-
-${OBJECTDIR}/scooper-main.o: scooper-main.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/scooper-main.o scooper-main.c
-
-${OBJECTDIR}/scooper-scoop-utils.o: scooper-scoop-utils.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/scooper-scoop-utils.o scooper-scoop-utils.c
-
-${OBJECTDIR}/sorter-drive-utils.o: sorter-drive-utils.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/sorter-drive-utils.o sorter-drive-utils.c
-
-${OBJECTDIR}/sorter-main.o: sorter-main.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/sorter-main.o sorter-main.c
-
-${OBJECTDIR}/utils.o: utils.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/utils.o utils.c
 
 # Subprojects
 .build-subprojects:
@@ -115,7 +67,7 @@ ${OBJECTDIR}/utils.o: utils.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/botball2013.exe
 
 # Subprojects
 .clean-subprojects:

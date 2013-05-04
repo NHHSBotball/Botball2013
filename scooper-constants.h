@@ -30,19 +30,20 @@
 #define kServoPositionScoopBottomRight (2047 - kServoPositionScoopBottomLeft)
 #define kServoPositionScoopMidLeft 1400
 #define kServoPositionScoopMidRight (2047 - kServoPositionScoopMidLeft)
-#define kServoPositionScoopTopLeft 930
+#define kServoPositionScoopTopLeft 850
 #define kServoPositionScoopTopRight (2047 - kServoPositionScoopTopLeft)
 #define kServoPositionScoopMaxLeft 444
 #define kServoPositionScoopMaxRight (2047 - kServoPositionScoopMaxLeft)
 
 #define kServoPositionScoopTiltOffset 400
-#define kServoPositionScoopTiltLow 553
-#define kServoPositionScoopTiltHigh (700 + kServoPositionScoopTiltOffset)
-#define kServoPositionScoopTiltVeryHigh 2047
+#define kServoPositionScoopTiltLow 323
+#define kServoPositionScoopTiltHigh (600 + kServoPositionScoopTiltOffset)
+#define kServoPositionScoopTiltHighBack (400 + kServoPositionScoopTiltOffset)
+#define kServoPositionScoopTiltVeryHigh 1347
 #define kServoPositionScoopTiltDump (1410 + kServoPositionScoopTiltOffset)
 #define kServoPositionScoopTiltDumpLow (900 + kServoPositionScoopTiltOffset)
 
-#define kMotorPositionScoopDoor 560
+#define kMotorPositionScoopDoor 530
 #define kMotorPositionScoopDoorWide 1060
 
 

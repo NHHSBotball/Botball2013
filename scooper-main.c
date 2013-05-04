@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     
     raise_scoop_level();
     
-    drive_straight(800);
+    drive_straight(900);
     drive_straight(-50);//old value 320
     /*//to be replaced with tick thing
     motor(kMotorPortDriveLeft, 100);
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
     // pile 1
     open_doors_narrow();
     lower_scoop_level();
-    drive_straight(350);
+    drive_straight(370);
     close_scoop_doors();
     raise_scoop_level();
     
@@ -41,26 +41,26 @@ int main(int argc, char** argv) {
     //Reverse to pile 2
     
     
-    drive_straight(-240);
+    drive_straight(-290);
     turn_ticks(50, -700);
     drive_straight(-250);
-    
-    turn_ticks(50, 810);
-    drive_straight(-40);
+    set_servo_position(kServoPortScoopTiltLeft, kServoPositionScoopTiltHighBack);
+    set_servo_position(kServoPortScoopTiltRight, 2047 - kServoPositionScoopTiltHighBack);
+    turn_ticks(50, 770);//this value
     lower_scoop_level();
     open_scoop_doors();
     
     //pick up pile 2
-    drive_straight(270);
+    drive_straight(320);
     close_scoop_doors();
     raise_scoop_level(); 
-    drive_straight(190);
+    drive_straight(80);
     
     raise_scoop_very_high();
     
-    drive_straight(150);
+    drive_straight(170);
     turn_ticks(50, 500);
-    drive_straight(-100);
+    drive_straight(-90);
     turn_ticks_in_place(50, 650);
     drive_straight(100);
 
@@ -71,8 +71,8 @@ int main(int argc, char** argv) {
     
     // drive_straight(50);
     
-    set_servo_position(kServoPortScoopTiltLeft, 1000);
-    set_servo_position(kServoPortScoopTiltRight, 2047 - 1000);
+    //set_servo_position(kServoPortScoopTiltLeft, 1000);
+    //set_servo_position(kServoPortScoopTiltRight, 2047 - 1000);
     msleep(200);
     open_doors_wide();
     dump();
@@ -83,24 +83,24 @@ int main(int argc, char** argv) {
     dump();
     
     //raise_scoop();
-    raise_scoop_very_high();
     drive_straight(-400);
     raise_scoop_level();
     close_doors_wide();
     raise_scoop_very_high();
     turn_ticks_in_place(50, -1350);
-    drive_straight(-200);
-    
+    drive_straight(100);
     
     //drive to pile 3
+    raise_scoop_level();
+    turn_ticks_in_place(50, 700);
+    turn_ticks_in_place(50, -400);
     lower_scoop_level();
-    turn_ticks_in_place(50, -900);
-    drive_straight(550);
-    turn_ticks_in_place(50, 70);
-    open_scoop_doors();
+    turn_ticks_in_place(50, -300);
     drive_straight(100);
     
     //pick up pile 3
+    open_scoop_doors();
+    drive_straight(400);
     close_scoop_doors();
     turn_ticks_in_place(50, -100);
     drive_straight(-400);
